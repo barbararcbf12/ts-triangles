@@ -1,0 +1,29 @@
+.ts-form .ts-field.ts-date, .ts-form .ts-field.ts-text {
+    width: 50px;
+}
+
+.myinput {
+    width: 50px;
+}
+
+.myform {
+    width: 35%; 
+    margin:0 auto;
+    text-align: center;
+    min-width: 400px;
+    height: 400px;
+}
+
+.triangle {
+    width: 400px;
+    height: 250px;
+    background-image: url("../images/placeholder.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center; /* Center the image */
+}
+
+.ts-modal.ts-transition.ts-open, .ts-modal.ts-transition.ts-opening {
+    transform: scale(0.75);
+    opacity: 0.95;
+}

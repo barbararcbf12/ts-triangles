@@ -1,0 +1,3 @@
+export { classifyTriangle } from './triangle';
+
+

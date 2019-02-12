@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>My App</title>
+		<meta name="viewport" content="width=device-width"/>
+		<meta name="ts-app-title" content="Triangle builder"/>
+        <link rel="ts-app-icon" href="./images/triangle.png"/>
+        <!-- Link to TS standards-->
+        <link rel="stylesheet" href="http://d5wfroyti11sa.cloudfront.net/prod/client/ts-12.0.1.min.css"/>
+		<script src="http://d5wfroyti11sa.cloudfront.net/prod/client/ts-12.0.1.min.js"></script>
+		<!-- My code, ovewriting TS standards -->
+		<link rel="stylesheet" href="./css/styles.css"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<div data-ts="App">
+			<div data-ts="Main">
+				<div data-ts="Content">
+					<div data-ts="Panel">
+						<div id="MyForm" class="myform">
+							<h2>Inform lengths for the sides of your triangle:</h2>
+							<div> 
+								<img id="triangle" src="./images/placeholder.png"  style="width:400px;" />
+							</div>
+							<form data-ts="Form" id="Form" >
+								<fieldset>
+									<label>
+										<span>Enter length for side A:</span>
+										<input type="text" id="a" class="numbersOnly" />
+									</label>
+								</fieldset>
+								<fieldset>
+									<label>
+										<span>Enter length for side B:</span>
+										<input type="text" id="b" class="numbersOnly myinput" />
+									</label>
+								</fieldset>
+								<fieldset>
+									<label>
+										<span>Enter length for side C:</span>
+										<input type="text" id="c" class="numbersOnly" />
+									</label>
+								</fieldset>
+								<button data-ts="Button" class="ts-primary" id="button">
+									<span class="ts-hide-mobile-only">Check triangle's type</span>
+									<i class="ts-show-mobile-only ts-icon-arrowright"></i>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <aside data-ts="Aside" data-ts.title="Aside Header" data-ts.open="true" id="myaside">
+				<div data-ts="Panel">
+					<p>Aside content.</p>
+				</div>
+			</aside> -->
+		</div>
+
+		<!-- MODAL -->
+		<dialog data-ts="Modal" id="inputModal">
+				<ul data-ts="Panels">
+					<li data-ts="Panel" data-ts.label="Side A">
+						<div data-ts="Box">
+							<fieldset>
+								<label>
+									<span>Enter length for side A:</span>
+									<input type="text" id="a" class="numbersOnly" />
+								</label>
+							</fieldset>
+							<div>
+								<button id="nextTab" data-ts="Button" class="ts-primary">
+									<span class="ts-hide-mobile-only">Next</span>
+									<i class="ts-show-mobile-only ts-icon-arrowright"></i>
+								</button>
+							</div>
+						</div>
+					</li>
+					<li data-ts="Panel" data-ts.label="Side B">
+						<div data-ts="Box">
+							<fieldset>
+								<label>
+									<span>Enter length for side B:</span>
+									<input type="text" id="b" class="numbersOnly myinput" />
+								</label>
+							</fieldset>
+							<div>
+								<button id="openModal" data-ts="Button" class="ts-primary">
+									<span class="ts-hide-mobile-only">Previous</span>
+									<i class="ts-show-mobile-only ts-icon-arrowright"></i>
+								</button>
+								<button id="openModal" data-ts="Button" class="ts-primary">
+									<span class="ts-hide-mobile-only">Next</span>
+									<i class="ts-show-mobile-only ts-icon-arrowright"></i>
+								</button>
+							</div>
+						</div>
+					</li>
+					<li data-ts="Panel" data-ts.label="Side C">
+						<div data-ts="Box">
+							<fieldset>
+								<label>
+									<span>Enter length for side C:</span>
+									<input type="text" id="c" class="numbersOnly" />
+								</label>
+							</fieldset>
+							<div>
+								<button id="openModal" data-ts="Button" class="ts-primary">
+									<span class="ts-hide-mobile-only">Previous</span>
+									<i class="ts-show-mobile-only ts-icon-arrowright"></i>
+								</button>
+								<button id="openModal" data-ts="Button" class="ts-primary">
+									<span class="ts-hide-mobile-only">Next</span>
+									<i class="ts-show-mobile-only ts-icon-arrowright"></i>
+								</button>
+							</div>
+						</div>
+					</li>
+				</li>
+			</dialog>
+
+		<script>
+			document.addEventListener("DOMContentLoaded", function(event) {
+				document.getElementById("a").focus();
+				ts.ui.ready(function() {
+					
+					//Open modal on click button
+					$("#openModal").click(function(){
+						ts.ui.get('#inputModal').open();
+					});
+				
+					//Change triangle image
+					function getTriangleType(a,b,c) {
+
+						if (a === b && b === c) {
+							document.getElementById("triangle").src="./images/equilateral.png";
+							// alert('equilateral');
+						}
+						else if (a === b || a === c || b === c) {
+							document.getElementById("triangle").src="./images/isosceles.png";
+							// alert('isosceles')
+						}
+						else {
+							document.getElementById("triangle").src="./images/scalene.png";
+							// alert('scalene');
+						}
+					}
+
+					//Checking if input is valid
+					jQuery('.numbersOnly').keyup(function () { 
+						if(isNaN(this.value)) alert("The length must be a positive number, greater than zero.");
+						if(this.value != "" && this.value <= 0) alert("A triangle cannot have sides with length negative, nor equal to zero.");
+						this.value = this.value.replace(/[^1-9\.]/g,'');
+					});
+
+					//Checking if input is missing
+					$("#button").click(function(){
+						if($('#a').val() === "") {
+							alert("Enter a value for A");			
+							document.getElementById("a").focus();
+						}
+						else if($('#b').val() === "") {
+							alert("Enter a value for B");			
+							document.getElementById("b").focus();
+						}
+						else if($('#c').val() === "") {
+							alert("Enter a value for C");			
+							document.getElementById("c").focus();
+						}
+						else getTriangleType($('#a').val(),$('#b').val(),$('#c').val());
+					});
+				});
+			});
+
+			// Trying to change tabs programatically
+			$("nextTab").click(function(){
+				ts.ui.get('#inputModal', modal => {
+					var tabs = modal.tabs();
+					tabs[0].select();
+					tabs.reverse();
+				});
+			});
+
+			
+			
+
+		</script>
+
+	</body>
+</html>
