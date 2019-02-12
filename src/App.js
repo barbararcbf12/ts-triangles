@@ -58,8 +58,8 @@ class App extends Component {
     //   this.state.sideB, 
     //   this.state.sideC
     // );
-
-    // this.updateTriangleType(this.state.triangleType);
+    // evt.preventDefault();
+    // this.updateTriangleType(this.props.type);
 
     if (this.state.sideA !== "" && this.state.sideB !== "" && this.state.sideC !== ""){
       if (this.state.sideA === this.state.sideB && this.state.sideB === this.state.sideC) {
@@ -94,51 +94,60 @@ class App extends Component {
     const isDisabled = Object.keys(errors).some(x => errors[x]);
 
     return (
-        <div className="App">
-          <form onSubmit={this.checkTriangleType}>
-            <h1>Type lengths of the sides of your triangle</h1>
-            <img src={triangle} alt="Triangle" />
-            <br />
-            <label>Length side A: 
-              <input 
-                className={errors.sideA ? "error" : ""} 
-                name="sideA" 
-                value={this.state.sideA} 
-                onChange={this.updateInputValue} 
-                placeholder="Enter length"
-              />
-            </label>
-            <label>Length side B: 
-              <input 
-                className={errors.sideB ? "error" : ""} 
-                name="sideB" 
-                value={this.state.sideB} 
-                onChange={this.updateInputValue}  
-                placeholder="Enter length"
-              />
-            </label>
-            <label>Length side C: 
-              <input 
-                className={errors.sideC ? "error" : ""} 
-                name="sideC" 
-                value={this.state.sideC} 
-                onChange={this.updateInputValue}
-                placeholder="Enter length"
-                />
-            </label>
-            <button disabled={isDisabled} >Check type</button>
+        <div className="container">
+        <h1>Type lengths of the sides of your triangle</h1>
+        <form onSubmit={this.checkTriangleType} className="App">
+              <div>
+                <img src={triangle} alt="Triangle" />
+              </div>
+              <div className="column"> 
+                <label>Length side A: 
+                  <input 
+                    className={errors.sideA ? "error" : ""} 
+                    name="sideA" 
+                    value={this.state.sideA} 
+                    onChange={this.updateInputValue} 
+                    placeholder="Enter length"
+                  />
+                </label>
+                <label>Length side B: 
+                  <input 
+                    className={errors.sideB ? "error" : ""} 
+                    name="sideB" 
+                    value={this.state.sideB} 
+                    onChange={this.updateInputValue}  
+                    placeholder="Enter length"
+                  />
+                </label>
+                <label>Length side C: 
+                  <input 
+                    className={errors.sideC ? "error" : ""} 
+                    name="sideC" 
+                    value={this.state.sideC} 
+                    onChange={this.updateInputValue}
+                    placeholder="Enter length"
+                    />
+                </label>
+                <button disabled={isDisabled} > Check triangle's type</button>
+            </div>
           </form>
         </div>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    type: state.triangleType
+  };
+};
+
 const mapDispatchToProps = dispatch => {
     return {
-        onClassifyTriangle: (a, b, c) => dispatch(classifyTriangle(this.state.sideA, this.state.sideB, this.state.sideC))
+        onClassifyTriangle: (a, b, c) => dispatch(classifyTriangle(a,b,c)) //this.state.sideA, this.state.sideB, this.state.sideC))
     };
 };
 
-export default connect(mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 // export default App;

@@ -1,8 +1,8 @@
 import { CLASSIFY_TRIANGLE } from './actionsType';
 
-import configureStore from '../configureStore';
+// import configureStore from '../configureStore';
 
-const store = configureStore();
+// const store = configureStore();
 
 export const classifyTriangle = (a, b, c) => {
     return (dispatch) => {
@@ -23,11 +23,11 @@ export const classifyTriangle = (a, b, c) => {
     }
 };
 
-export const setTriangleType = type => {
-    store.dispatch({
+export const setTriangleType = (typ) => {
+    return {
         type: CLASSIFY_TRIANGLE,
-        triangleType: type
-    });
+        triangleType: typ
+    };
 };
 
 
