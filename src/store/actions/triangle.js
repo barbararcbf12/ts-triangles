@@ -24,6 +24,7 @@ export const classifyTriangle = (a, b, c) => {
 };
 
 export const setTriangleType = (typ) => {
+    console.log(typ);
     return {
         type: CLASSIFY_TRIANGLE,
         triangleType: typ

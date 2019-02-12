@@ -52,29 +52,30 @@ class App extends Component {
       evt.preventDefault();
       return;
     }
-
-    // this.props.onClassifyTriangle(
-    //   this.state.sideA, 
-    //   this.state.sideB, 
-    //   this.state.sideC
-    // );
-    // evt.preventDefault();
+    else{
+      evt.preventDefault();
+      this.props.onClassifyTriangle(
+        this.state.sideA, 
+        this.state.sideB, 
+        this.state.sideC
+      );
+    }
     // this.updateTriangleType(this.props.type);
 
-    if (this.state.sideA !== "" && this.state.sideB !== "" && this.state.sideC !== ""){
-      if (this.state.sideA === this.state.sideB && this.state.sideB === this.state.sideC) {
-        evt.preventDefault();
-        this.updateTriangleType("equilateral");
-      } 
-      else if (this.state.sideA === this.state.sideB || this.state.sideB === this.state.sideC || this.state.sideA === this.state.sideC) {
-        evt.preventDefault();
-        this.updateTriangleType("isosceles");
-      } 
-      else {
-        evt.preventDefault();
-        this.updateTriangleType("scalene");
-      }
-    }
+    // if (this.state.sideA !== "" && this.state.sideB !== "" && this.state.sideC !== ""){
+    //   if (this.state.sideA === this.state.sideB && this.state.sideB === this.state.sideC) {
+    //     evt.preventDefault();
+    //     this.updateTriangleType("equilateral");
+    //   } 
+    //   else if (this.state.sideA === this.state.sideB || this.state.sideB === this.state.sideC || this.state.sideA === this.state.sideC) {
+    //     evt.preventDefault();
+    //     this.updateTriangleType("isosceles");
+    //   } 
+    //   else {
+    //     evt.preventDefault();
+    //     this.updateTriangleType("scalene");
+    //   }
+    // }
   }
 
   canBeSubmitted() {
@@ -85,10 +86,9 @@ class App extends Component {
 
   render() {
     let triangle = placeholder;
-
-    if (this.state.triangleType === 'equilateral') {triangle = equilateral};
-    if (this.state.triangleType === 'isosceles') {triangle = isosceles};
-    if (this.state.triangleType === 'scalene') {triangle = scalene};
+    if (this.props.type.triangleType === 'equilateral') {triangle = equilateral};
+    if (this.props.type.triangleType === 'isosceles') {triangle = isosceles};
+    if (this.props.type.triangleType === 'scalene') {triangle = scalene};
 
     const errors = this.validate(this.state.sideA, this.state.sideB, this.state.sideC);
     const isDisabled = Object.keys(errors).some(x => errors[x]);

@@ -10,7 +10,7 @@ const reducer = ( state = initialState, action ) => {
         case CLASSIFY_TRIANGLE: 
             return {
                 ...state,
-                triangleType: state.triangleType
+                triangleType: action.triangleType
             };
 
         default:
