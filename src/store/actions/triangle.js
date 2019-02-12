@@ -1,25 +1,20 @@
 import { CLASSIFY_TRIANGLE } from './actionsType';
 
-// import configureStore from '../configureStore';
-
-// const store = configureStore();
+export const checkTriangleType = (a,b,c) => {
+    if (a === b && b === c) {
+        return "equilateral";
+    } 
+    else if (a === b || b === c || a === c) {
+        return "isosceles";
+    } 
+    else {
+        return "scalene";
+    }
+}
 
 export const classifyTriangle = (a, b, c) => {
     return (dispatch) => {
-    // return dispatch => {
-        // const token = getState().auth.token;
-        if (a === b && b === c) {
-            dispatch(setTriangleType("equilateral"));
-            // return "equilateral"
-        } 
-        else if (a === b || b === c || a === c) {
-            dispatch(setTriangleType("isosceles"));
-            // return "isosceles"
-        } 
-        else {
-            dispatch(setTriangleType("scalene"));
-            // return "scalene"
-        }
+        dispatch(setTriangleType(checkTriangleType(a,b,c)));
     }
 };
 

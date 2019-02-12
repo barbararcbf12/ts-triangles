@@ -13,8 +13,7 @@ class App extends Component {
   state = {
     sideA: '',
     sideB: '',
-    sideC: '',
-    // triangleType: ''
+    sideC: ''
   }
 
   validate(sideA, sideB, sideC) {
@@ -60,22 +59,6 @@ class App extends Component {
         this.state.sideC
       );
     }
-    // this.updateTriangleType(this.props.type);
-
-    // if (this.state.sideA !== "" && this.state.sideB !== "" && this.state.sideC !== ""){
-    //   if (this.state.sideA === this.state.sideB && this.state.sideB === this.state.sideC) {
-    //     evt.preventDefault();
-    //     this.updateTriangleType("equilateral");
-    //   } 
-    //   else if (this.state.sideA === this.state.sideB || this.state.sideB === this.state.sideC || this.state.sideA === this.state.sideC) {
-    //     evt.preventDefault();
-    //     this.updateTriangleType("isosceles");
-    //   } 
-    //   else {
-    //     evt.preventDefault();
-    //     this.updateTriangleType("scalene");
-    //   }
-    // }
   }
 
   canBeSubmitted() {
@@ -144,10 +127,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onClassifyTriangle: (a, b, c) => dispatch(classifyTriangle(a,b,c)) //this.state.sideA, this.state.sideB, this.state.sideC))
+        onClassifyTriangle: (a, b, c) => dispatch(classifyTriangle(a,b,c))
     };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-
-// export default App;
