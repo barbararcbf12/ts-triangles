@@ -1,15 +1,16 @@
-Tradeshift challenge
+# Tradeshift challenge
 
-What does this application does?
+## What does this application do?
+
 Single page application which determines the type of a triangle with three inputs for the lengths of its sides, given by the user.
 
-The application was developed making use of:
+## The application was developed making use of:
 - ReactJS
 - Redux 
 - Redux Thunk middleware (for async requests)
 - Jest 
 
-How was my process of development
+## How was my process of development
 
 I started by planning the application and implemented a quick "prototype" in HTML with Javascript/jQuery (html-VERSION folder).
 
